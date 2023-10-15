@@ -7,7 +7,7 @@ attributes/methods for other classes (child classes)
 import uuid
 from datetime import date
 from datetime import datetime
-# from models import storage
+from models import storage
 
 
 class BaseModel:
@@ -23,10 +23,10 @@ class BaseModel:
             self.__init(**kwargs)
             return
 
-        self.id = str(uuid.uuid4())
+        self.id = uuid.uuid4().hex
         self.created_at = datetime.now()
-        self.updated_at = datetime.now()
-        # storage.new(self)
+        self.updated_at = self.created_at
+        storage.new(self)
 
     def __init(self, **kwargs):
         """initialize instance attributes using kwargs
@@ -50,8 +50,8 @@ class BaseModel:
     def save(self):
         """ update the updated_at attr, with current datetime"""
         self.updated_at = datetime.now()
-        # storage.new(self)
-        # storage.save()
+        storage.new(self)
+        storage.save()
 
     def to_dict(self):
         """ returns a dictionary containing all keys/values of the instance"""
