@@ -19,6 +19,7 @@ from models import storage
 
 class HBNBCommand(cmd.Cmd):
     '''HBNB command line interpreter'''
+
     intro = ''
     prompt = '(hbnb) '
     original_input = ''
@@ -94,6 +95,10 @@ class HBNBCommand(cmd.Cmd):
         updated_obj.save()
 
     def do_class(self, args):
+        """enable command usage using dot notation
+        E.g: show User <id> = User.show(<id>)
+             User.count() - return number of instance of class User
+        """
         args = HBNBCommand.original_input.replace('.', ' ').replace('(', ' ') \
             .replace(')', '').replace('"', '').replace(',', '').split()
 
@@ -117,10 +122,12 @@ class HBNBCommand(cmd.Cmd):
         quit()
 
     def precmd(self, line: str) -> str:
+        """return original command line input before cmd_line manipulation"""
         HBNBCommand.original_input = line
         return line
 
     def emptyline(self):
+        """empty line should do nothing"""
         pass
 
     def count(self, class_name):
@@ -139,7 +146,7 @@ def parse(arg):
 
 
 def error_in_command(args, command):
-    '''handle errors in command return True if error
+    '''handle errors in command. return True if error
     exist in command, False if no error is found'''
 
     valid_class_names = ['BaseModel', 'User',
