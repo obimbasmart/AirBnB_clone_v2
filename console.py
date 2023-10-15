@@ -99,7 +99,6 @@ class HBNBCommand(cmd.Cmd):
 
         class_name = args[0]
         action = args[1]
-        print(args)
         match action:
             case 'all':
                 self.do_all(class_name)
