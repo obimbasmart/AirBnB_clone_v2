@@ -67,8 +67,8 @@ class HBNBCommand(cmd.Cmd):
             print([str(obj) for obj in all_objects])
             return
 
-        # if error_in_command(parse(args), 'all'):
-        #     return
+        if error_in_command(parse(args), 'all'):
+            return
 
         all_obj_in_class = [globals()[val['__class__']](**val)
                             for key, val in storage.all().items()
