@@ -41,7 +41,8 @@ class HBNBCommand(cmd.Cmd):
 
         key = '.'.join(parse(args))
         if (storage.all().get(key)):
-            print(storage.all()[key])
+            print(BaseModel(**storage.all()[key]))
+            # print(storage.all()[key])
         else:
             print('** no instance found **')
 
