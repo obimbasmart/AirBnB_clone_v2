@@ -56,3 +56,8 @@ class TestFileStorage(unittest.TestCase):
                             len(TestFileStorage.__storage.all()))
         self.assertEqual(self.initial_object_count + 1,
                          len(TestFileStorage.__storage.all()))
+
+    def test_reload(self):
+        """storage.reload() should reload all object from file"""
+        TestFileStorage.__storage.reload()
+        self.assertIsInstance(TestFileStorage.__storage.all(), dict)

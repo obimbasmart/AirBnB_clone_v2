@@ -9,4 +9,5 @@ from models.base_model import BaseModel
 class City(BaseModel):
     '''City: represents an actual City'''
 
+    state_id = ''
     name = ''

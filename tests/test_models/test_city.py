@@ -41,9 +41,12 @@ class TestCity(unittest.TestCase):
         self.assertIsInstance(obj2, City)
 
         self.assertEqual(self.c1.name, '')
+        self.assertEqual(self.c1.state_id, '')
 
+        self.c1.state_id = "12345"
         self.c1.name = "AriaraMarket"
         self.assertEqual(self.c1.name, "AriaraMarket")
+        self.assertEqual(self.c1.state_id, "12345")
 
     def test_types(self):
         """test for instance attribute and types"""
