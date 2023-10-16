@@ -36,13 +36,14 @@ class HBNBCommand(cmd.Cmd):
         '''Prints the string representation of an instance based on
         the class name and id. Ex: $ show BaseModel 1234-1234-1234'''
 
-        if (error_in_command(parse(args), 'show')):
+        args = parse(args)
+        if (error_in_command(args, 'show')):
             return
 
-        key = '.'.join(parse(args))
+        key = '.'.join(args)
         if (storage.all().get(key)):
-            print(BaseModel(**storage.all()[key]))
-            # print(storage.all()[key])
+            print(globals()[args[0]](**storage.all()[key]))
+
         else:
             print('** no instance found **')
 
