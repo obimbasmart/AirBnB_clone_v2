@@ -45,7 +45,7 @@ class TestUser(unittest.TestCase):
         self.assertEqual(self.u1.last_name, '')
         self.assertEqual(self.u1.first_name, '')
         self.assertEqual(self.u1.password, '')
-        self.assertEqual(self.u1.last_name, '')
+        self.assertEqual(self.u1.email, '')
 
         self.u1.last_name = "Smart"
         self.u1.first_name = "Obimba"
