@@ -35,4 +35,3 @@ class FileStorage:
             return
         with open(FileStorage.___file_path, 'r', encoding='utf-8') as file:
             FileStorage.__objects = json.loads(file.read())
-
