@@ -60,7 +60,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, args):
         ''' Prints all string representation of all instances based
-        or not on the class name. Ex: $ all BaseModel'''
+        or not on the class name. Ex: $ all BaseModel
+        '''
 
         if not args:
             all_objects = [globals()[val['__class__']](**val)
@@ -136,9 +137,15 @@ class HBNBCommand(cmd.Cmd):
         print(len([obj for key, obj in storage.all().items()
               if obj['__class__'] == class_name]))
 
+    def help_class(self):
+        print("Use dot notation e.g: User.all() => all Users")
+
     do_EOF = do_quit
     do_BaseModel = do_Place = do_City = do_User = do_class
     do_Review = do_Amenity = do_State = do_class
+
+    help_BaseModel = help_Place = help_City = help_User = help_class
+    help_Review = help_Amenity = help_State = help_class
 
 
 def parse(arg):
