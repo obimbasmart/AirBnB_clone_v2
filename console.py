@@ -97,10 +97,8 @@ class HBNBCommand(cmd.Cmd):
         updated_obj.save()
 
     def do_class(self, args):
-        """enable command usage using dot notation
-        E.g: show User <id> = User.show(<id>)
-             User.count() - return number of instance of class User
-        """
+        """enable command usage using dot notation"""
+
         args = HBNBCommand.original_input.replace('.', ' ').replace('(', ' ') \
             .replace(')', '').replace('"', '').replace(',', '').split()
 
@@ -138,14 +136,17 @@ class HBNBCommand(cmd.Cmd):
               if obj['__class__'] == class_name]))
 
     def help_class(self):
+        """help for commands with dot notation"""
         print("Use dot notation e.g: User.all() => all Users")
 
     do_EOF = do_quit
-    do_BaseModel = do_Place = do_City = do_User = do_class
-    do_Review = do_Amenity = do_State = do_class
+    do_BaseModel = do_class
+    help_BaseModel = help_class
+    # do_BaseModel = do_Place = do_City = do_User = do_class
+    # do_Review = do_Amenity = do_State = do_class
 
-    help_BaseModel = help_Place = help_City = help_User = help_class
-    help_Review = help_Amenity = help_State = help_class
+    # help_BaseModel = help_Place = help_City = help_User = help_class
+    # help_Review = help_Amenity = help_State = help_class
 
 
 def parse(arg):
