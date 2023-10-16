@@ -32,6 +32,10 @@ class TestFileStorage(unittest.TestCase):
         """storage.all() should return all objects"""
         self.assertIsInstance(TestFileStorage.__storage.all(), dict)
 
+    def test_file_path(self):
+        """test correct file_path type"""
+        self.assertIsInstance(FileStorage._FileStorage__file_path, str)
+
     def test_init(self):
         """new objects should be saved to storage when instantianted"""
         new_obj = BaseModel()
@@ -59,5 +63,17 @@ class TestFileStorage(unittest.TestCase):
 
     def test_reload(self):
         """storage.reload() should reload all object from file"""
+
+        TestFileStorage.__storage.all().clear()
+        TestFileStorage.__storage.save()
+
         TestFileStorage.__storage.reload()
         self.assertIsInstance(TestFileStorage.__storage.all(), dict)
+        self.assertEqual(TestFileStorage.__storage.all(), {})
+
+        first_model = BaseModel()
+        first_model.save()
+
+        TestFileStorage.__storage.reload()
+        self.assertIsInstance(TestFileStorage.__storage.all(), dict)
+        self.assertNotEqual(TestFileStorage.__storage.all(), {})
