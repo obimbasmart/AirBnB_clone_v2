@@ -5,7 +5,15 @@ Module contains entry point of the console which serves
 as the command line interpreter for managing Objects
 '''
 
+from models import storage
+from models.amenity import Amenity
+from models.base_model import BaseModel
 import cmd
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.user import User
 
 
 class HBNBCommand(cmd.Cmd):
@@ -15,75 +23,75 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     original_input = ''
 
-    # def do_create(self, arg):
-    #     '''Creates a new instance of "arg"'''
-    #     if error_in_command(parse(arg), 'create'):
-    #         return
+    def do_create(self, arg):
+        '''Creates a new instance of "arg"'''
+        if error_in_command(parse(arg), 'create'):
+            return
 
-    #     new_obj = globals()[arg]()
-    #     new_obj.save()
-    #     print(new_obj.id)
+        new_obj = globals()[arg]()
+        new_obj.save()
+        print(new_obj.id)
 
-    # def do_show(self, args):
-    #     '''Prints the string representation of an instance based on
-    #     the class name and id. Ex: $ show BaseModel 1234-1234-1234'''
+    def do_show(self, args):
+        '''Prints the string representation of an instance based on
+        the class name and id. Ex: $ show BaseModel 1234-1234-1234'''
 
-    #     if (error_in_command(parse(args), 'show')):
-    #         return
+        if (error_in_command(parse(args), 'show')):
+            return
 
-    #     key = '.'.join(parse(args))
-    #     if (storage.all().get(key)):
-    #         print(storage.all()[key])
-    #     else:
-    #         print('** no instance found **')
+        key = '.'.join(parse(args))
+        if (storage.all().get(key)):
+            print(storage.all()[key])
+        else:
+            print('** no instance found **')
 
-    # def do_destroy(self, args):
-    #     '''Deletes an instance based on the class name and id'''
-    #     if (error_in_command(parse(args), 'destroy')):
-    #         return
+    def do_destroy(self, args):
+        '''Deletes an instance based on the class name and id'''
+        if (error_in_command(parse(args), 'destroy')):
+            return
 
-    #     key = '.'.join(parse(args))
-    #     if (storage.all().pop(key, None)):
-    #         storage.save()
-    #     else:
-    #         print('** no instance found **')
+        key = '.'.join(parse(args))
+        if (storage.all().pop(key, None)):
+            storage.save()
+        else:
+            print('** no instance found **')
 
-    # def do_all(self, args):
-    #     ''' Prints all string representation of all instances based
-    #     or not on the class name. Ex: $ all BaseModel'''
+    def do_all(self, args):
+        ''' Prints all string representation of all instances based
+        or not on the class name. Ex: $ all BaseModel'''
 
-    #     if not args:
-    #         all_objects = [globals()[val['__class__']](**val)
-    #                        for key, val in storage.all().items()]
-    #         print([str(obj) for obj in all_objects])
-    #         return
+        if not args:
+            all_objects = [globals()[val['__class__']](**val)
+                           for key, val in storage.all().items()]
+            print([str(obj) for obj in all_objects])
+            return
 
-    #     if error_in_command(parse(args), 'all'):
-    #         return
+        if error_in_command(parse(args), 'all'):
+            return
 
-    #     all_obj_in_class = [globals()[val['__class__']](**val)
-    #                         for key, val in storage.all().items()
-    #                         if val['__class__'] == args]
-    #     print([str(obj) for obj in all_obj_in_class])
+        all_obj_in_class = [globals()[val['__class__']](**val)
+                            for key, val in storage.all().items()
+                            if val['__class__'] == args]
+        print([str(obj) for obj in all_obj_in_class])
 
-    # def do_update(self, args):
-    #     '''Updates an instance based on the class name and id by
-    #     adding or updating attribute'''
+    def do_update(self, args):
+        '''Updates an instance based on the class name and id by
+        adding or updating attribute'''
 
-    #     if error_in_command(parse(args), 'update'):
-    #         return
+        if error_in_command(parse(args), 'update'):
+            return
 
-    #     args = parse(args)
-    #     key = '.'.join(args[:2])
-    #     obj_dict = storage.all().get(key, None)
+        args = parse(args)
+        key = '.'.join(args[:2])
+        obj_dict = storage.all().get(key, None)
 
-    #     if (not obj_dict):  # no object found
-    #         print('** no instance found **')
-    #         return
+        if (not obj_dict):  # no object found
+            print('** no instance found **')
+            return
 
-    #     updated_obj = globals()[args[0]](**obj_dict)
-    #     setattr(updated_obj, args[2], args[3])
-    #     updated_obj.save()
+        updated_obj = globals()[args[0]](**obj_dict)
+        setattr(updated_obj, args[2], args[3])
+        updated_obj.save()
 
     # def do_class(self, args):
     #     """enable command usage using dot notation
