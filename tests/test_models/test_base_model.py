@@ -78,7 +78,7 @@ class TestBaseModel(unittest.TestCase):
         initial_id_m1 = self.m1.id
         initial_id_m2 = self.m2.id
 
-        intital_update_time_m1 = self.m1.updated_at
+        initial_update_time_m1 = self.m1.updated_at
         intital_update_time_m2 = self.m2.updated_at
 
         self.m1.name = "ObimbaSmart"
@@ -90,7 +90,7 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(self.m1.id, initial_id_m1)
         self.assertEqual(self.m2.id, initial_id_m2)
 
-        self.assertNotEqual(self.m1.updated_at, initial_id_m1)
+        self.assertNotEqual(self.m1.updated_at, initial_update_time_m1)
         self.assertNotEqual(self.m2.updated_at, intital_update_time_m2)
 
         self.assertEqual(self.m1.name, "ObimbaSmart")
