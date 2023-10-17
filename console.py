@@ -83,15 +83,14 @@ class HBNBCommand(cmd.Cmd):
 
         args = parse(args)
         key = '.'.join(args[:2])
-        obj_dict = storage.all().get(key, None)
+        obj = storage.all().get(key, None)
 
-        if (not obj_dict):  # no object found
+        if (not obj):  # no object found
             print('** no instance found **')
             return
 
-        updated_obj = globals()[args[0]](**obj_dict)
-        setattr(updated_obj, args[2], args[3])
-        updated_obj.save()
+        setattr(obj, args[2], args[3])
+        obj.save()
 
     def do_quit(self, arg):
         '''Quit command to exit the program\n'''
