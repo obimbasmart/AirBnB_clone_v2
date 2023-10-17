@@ -6,7 +6,6 @@ deserialization of BaseModel class"""
 
 from models.amenity import Amenity
 from models.base_model import BaseModel
-import models.base_model
 import cmd
 from models.city import City
 from models.place import Place
@@ -49,4 +48,4 @@ class FileStorage:
             all_reloaded_obj = json.loads(file.read())
             for key, value in all_reloaded_obj.items():
                 FileStorage.__objects[key] = globals()[
-                    value['__class__']](value)
+                    value['__class__']](**value)
