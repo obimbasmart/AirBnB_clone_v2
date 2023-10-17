@@ -47,5 +47,6 @@ class FileStorage:
         with open(FileStorage.__file_path, 'r', encoding='utf-8') as file:
             all_reloaded_obj = json.loads(file.read())
             for key, value in all_reloaded_obj.items():
-                FileStorage.__objects[key] = globals()[
-                    value['__class__']](**value)
+                if '__class__' in value:
+                    FileStorage.__objects[key] = globals()[
+                        value['__class__']](**value)
