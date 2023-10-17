@@ -42,7 +42,7 @@ class HBNBCommand(cmd.Cmd):
 
         key = '.'.join(args)
         if (storage.all().get(key)):
-            print(globals()[args[0]](**storage.all()[key]))
+            print(storage.all()[key])
 
         else:
             print('** no instance found **')
@@ -64,17 +64,14 @@ class HBNBCommand(cmd.Cmd):
         '''
 
         if not args:
-            all_objects = [globals()[val['__class__']](**val)
-                           for key, val in storage.all().items()]
-            print([str(obj) for obj in all_objects])
+            print([str(obj) for obj in storage.all().values()])
             return
 
         if error_in_command(parse(args), 'all'):
             return
 
-        all_obj_in_class = [globals()[val['__class__']](**val)
-                            for key, val in storage.all().items()
-                            if val['__class__'] == args]
+        all_obj_in_class = [obj for obj in storage.all().values()
+                            if obj.to_dict()['__class__'] == args]
         print([str(obj) for obj in all_obj_in_class])
 
     def do_update(self, args):
