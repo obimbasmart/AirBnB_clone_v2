@@ -79,6 +79,16 @@ class TestFileStorage(unittest.TestCase):
         self.storage.reload()
         self.assertEqual(storage.all().get('BaseModel.' + id).name, "New Name")
 
+        new_obj = BaseModel()
+        new_obj.name = "new_obj"
+        new_obj.age = 1
+        self.storage.save()
+        new_obj_key = 'BaseModel.' + str(new_obj.id)
+        self.assertEqual(self.storage.all().get(new_obj_key), new_obj)
+
+        del self.storage.all()[new_obj_key]
+        self.assertNotIn(new_obj_key, self.storage.all())
+
     def test_reload(self):
         """storage.reload() should reload all object from file"""
 
