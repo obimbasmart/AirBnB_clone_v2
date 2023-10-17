@@ -96,27 +96,6 @@ class HBNBCommand(cmd.Cmd):
         setattr(updated_obj, args[2], args[3])
         updated_obj.save()
 
-    def do_class(self, args):
-        """enable command usage using dot notation"""
-
-        args = HBNBCommand.original_input.replace('.', ' ').replace('(', ' ') \
-            .replace(')', '').replace('"', '').replace(',', '').split()
-
-        class_name = args[0]
-        action = args[1]
-        match action:
-            case 'all':
-                self.do_all(class_name)
-            case 'count':
-                self.count(class_name)
-            case 'show':
-                self.do_show(class_name + ' ' + args[2])
-            case 'destroy':
-                self.do_destroy(class_name + ' ' + args[2])
-            case 'update':
-                self.do_update(
-                    ' '.join([class_name, args[2], args[3], args[4]]))
-
     def do_quit(self, arg):
         '''Quit command to exit the program\n'''
         quit()
@@ -140,13 +119,6 @@ class HBNBCommand(cmd.Cmd):
         print("Use dot notation e.g: User.all() => all Users")
 
     do_EOF = do_quit
-    do_BaseModel = do_class
-    help_BaseModel = help_class
-    # do_BaseModel = do_Place = do_City = do_User = do_class
-    # do_Review = do_Amenity = do_State = do_class
-
-    # help_BaseModel = help_Place = help_City = help_User = help_class
-    # help_Review = help_Amenity = help_State = help_class
 
 
 def parse(arg):
