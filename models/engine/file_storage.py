@@ -24,6 +24,16 @@ class FileStorage:
     __objects = {}
     __file_path = "file.json"
 
+    @property
+    def test_db_file(self):
+        return FileStorage.__file_path
+
+    @test_db_file.setter
+    def test_db_file(self, value):
+        if not value or not isinstance(value, str):
+            return
+        FileStorage.__file_path = value
+
     def all(self):
         '''return dictionary of objects: __objects'''
         return FileStorage.__objects
