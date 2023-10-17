@@ -36,6 +36,9 @@ class TestFileStorage(unittest.TestCase):
         """test correct file_path type"""
         self.assertIsInstance(FileStorage._FileStorage__file_path, str)
 
+    def test_fileStorage_object(self):
+        self.assertIsInstance(FileStorage._FileStorage__objects, dict)
+
     def test_init(self):
         """new objects should be saved to storage when instantianted"""
         new_obj = BaseModel()
