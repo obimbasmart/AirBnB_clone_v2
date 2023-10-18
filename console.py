@@ -115,6 +115,36 @@ class HBNBCommand(cmd.Cmd):
         using the arguments"""
         self.__perform_advanced_command('BaseModel', args)
 
+    def do_User(self, args):
+        """BaseModel.command(<argument>) := perform command on BaseModel class
+        using the arguments"""
+        self.__perform_advanced_command('BaseModel', args)
+
+    def do_Place(self, args):
+        """Place.command(<argument>) := perform command on Place class
+        using the arguments"""
+        self.__perform_advanced_command('BaseModel', args)
+
+    def do_City(self, args):
+        """City.command(<argument>) := perform command on City class
+        using the arguments"""
+        self.__perform_advanced_command('BaseModel', args)
+
+    def do_Amenity(self, args):
+        """Amenity.command(<argument>) := perform command on Amenity class
+        using the arguments"""
+        self.__perform_advanced_command('BaseModel', args)
+
+    def do_State(self, args):
+        """State.command(<argument>) := perform command on State class
+        using the arguments"""
+        self.__perform_advanced_command('BaseModel', args)
+
+    def do_Review(self, args):
+        """Review.command(<argument>) := perform command on Review class
+        using the arguments"""
+        self.__perform_advanced_command('BaseModel', args)
+
     do_EOF = do_quit
 
     def __perform_advanced_command(self, klass, args):
