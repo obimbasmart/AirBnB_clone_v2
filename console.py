@@ -62,7 +62,7 @@ class HBNBCommand(cmd.Cmd):
         ''' Prints all string representation of all instances based
         or not on the class name. Ex: $ all BaseModel
         '''
-
+        print(args)
         if not args:
             print([str(obj) for obj in storage.all().values()])
             return
@@ -108,13 +108,38 @@ class HBNBCommand(cmd.Cmd):
     def count(self, class_name):
         '''retrieve the number of instances of a class'''
         print(len([obj for key, obj in storage.all().items()
-              if obj['__class__'] == class_name]))
+                   if class_name in key]))
 
-    def help_class(self):
-        """help for commands with dot notation"""
-        print("Use dot notation e.g: User.all() => all Users")
+    def do_BaseModel(self, args):
+        """BaseModel.command(<argument>) := perform command on BaseModel class
+        using the arguments"""
+        self.__perform_advanced_command('BaseModel', args)
 
     do_EOF = do_quit
+
+    def __perform_advanced_command(self, klass, args):
+        """helper function for advanced commands"""
+
+        commands = {
+            "all": self.do_all,
+            "count": self.count,
+            "show": self.do_show,
+            "destroy": self.do_destroy,
+            "update": self.do_update
+        }
+        arg_list = args.replace(".", ' ').replace('(', " "). \
+            replace(')', "").split()
+        command = arg_list[0]
+
+        if command in commands:
+            if command in "all | count":
+                commands[command](klass)
+            elif command in "destroy | show":
+                commands[command](klass + ' ' + arg_list[1])
+
+        #     case 'update':
+        #         self.do_update(
+        #             ' '.join([class_name, args[2], args[3], args[4]]))
 
 
 def parse(arg):
