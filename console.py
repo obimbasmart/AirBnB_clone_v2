@@ -66,7 +66,6 @@ class HBNBCommand(cmd.Cmd):
         if not args:
             print([str(obj) for obj in storage.all().values()])
             return
-
         if error_in_command(parse(args), 'all'):
             return
 
@@ -160,16 +159,17 @@ class HBNBCommand(cmd.Cmd):
         arg_list = args.replace(".", ' ').replace('(', " "). \
             replace(')', "").split()
         command = arg_list[0]
+        print(arg_list)
+        print(command)
 
         if command in commands:
             if command in "all | count":
                 commands[command](klass)
             elif command in "destroy | show":
                 commands[command](klass + ' ' + arg_list[1])
-
-        #     case 'update':
-        #         self.do_update(
-        #             ' '.join([class_name, args[2], args[3], args[4]]))
+            else:
+                commands[command](
+                    klass + ' ' + ' '.join(arg_list[1:]).replace(',', ''))
 
 
 def parse(arg):
