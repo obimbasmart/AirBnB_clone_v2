@@ -12,6 +12,7 @@ import cmd
 from models.city import City
 from models.place import Place
 from models.review import Review
+import re
 from models.state import State
 from models.user import User
 
@@ -79,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
 
         if error_in_command(parse(args), 'update'):
             return
-
+        print(args)
         args = parse(args)
         key = '.'.join(args[:2])
         obj = storage.all().get(key, None)
@@ -160,7 +161,7 @@ class HBNBCommand(cmd.Cmd):
             replace(')', "").split()
         command = arg_list[0]
         print(arg_list)
-        print(command)
+        # print(command)
 
         if command in commands:
             if command in "all | count":
@@ -168,8 +169,19 @@ class HBNBCommand(cmd.Cmd):
             elif command in "destroy | show":
                 commands[command](klass + ' ' + arg_list[1])
             else:
-                commands[command](
-                    klass + ' ' + ' '.join(arg_list[1:]).replace(',', ''))
+                input_string = klass + ' ' + args
+                match = re.search(r'({.*?})', input_string)
+                if match:
+                    print(match.group(1))
+                    obj_dict = eval(match.group(1))
+                    print(obj_dict)
+                    for attr, val in obj_dict.items():
+                        commands[command](
+                            klass + ' ' + arg_list[1].replace(',', '') +
+                            ' ' + attr + ' ' + str(val))
+                else:
+                    commands[command](
+                        klass + ' ' + ' '.join(arg_list[1:]).replace(',', ''))
 
 
 def parse(arg):
