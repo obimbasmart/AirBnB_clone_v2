@@ -45,28 +45,41 @@ class TestConsole(unittest.TestCase):
             f.close()
 
     def test_BaseModel(self):
-        ''' test `BaseModel.all()` command'''
+        ''' test `BaseModel` command'''
 
         # all
         with patch('sys.stdout', new=StringIO()) as f:
+            """test BaseModel.all()"""
             HBNBCommand().onecmd('BaseModel.all()')
             self.assertEqual("[]\n", f.getvalue())
             f.close()
 
         with patch('sys.stdout', new=StringIO()) as f:
+            """ test `all BaseModel` """
             HBNBCommand().onecmd('all BaseModel')
             self.assertEqual("[]\n", f.getvalue())
             f.close()
 
         # count
         with patch('sys.stdout', new=StringIO()) as f:
+            """test `BaseModel.count()` """
             HBNBCommand().onecmd('BaseModel.count()')
             self.assertEqual("0\n", f.getvalue())
             f.close()
 
         with patch('sys.stdout', new=StringIO()) as f:
-            HBNBCommand().onecmd('BaseModel.count()')
-            self.assertEqual("0\n", f.getvalue())
+            HBNBCommand().onecmd('show BaseModel 1234567890')
+            self.assertEqual('** no instance found **\n', f.getvalue())
+            f.close()
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('show InvalidClass 1234567890')
+            self.assertEqual("** class doesn't exist **\n", f.getvalue())
+            f.close()
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('BaseModel.show(12345)')
+            self.assertEqual('** no instance found **\n', f.getvalue())
             f.close()
 
     def test_User(self):
@@ -92,4 +105,19 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('User.count()')
             self.assertEqual("0\n", f.getvalue())
+            f.close()
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('show User 1234567890')
+            self.assertEqual('** no instance found **\n', f.getvalue())
+            f.close()
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('show InvalidClass 1234567890')
+            self.assertEqual("** class doesn't exist **\n", f.getvalue())
+            f.close()
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('User.show(12345)')
+            self.assertEqual('** no instance found **\n', f.getvalue())
             f.close()
