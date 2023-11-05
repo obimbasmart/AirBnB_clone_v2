@@ -7,6 +7,7 @@ import unittest
 from models import storage
 from unittest.mock import patch
 from io import StringIO
+import os
 
 
 class TestConsole(unittest.TestCase):
@@ -15,6 +16,12 @@ class TestConsole(unittest.TestCase):
     def setUp(self):
         self.storage = storage
         self.storage.test_db_file = 'test_consele_db.json'
+        self.storage.all().clear()
+        self.storage.save()
+
+    def tearDown(self):
+        self.storage.all().clear()
+        self.storage.save()
 
     def test_quit(self):
         ''' test `quit` command'''
@@ -35,3 +42,54 @@ class TestConsole(unittest.TestCase):
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd("\n")
             self.assertEqual('', f.getvalue())
+            f.close()
+
+    def test_BaseModel(self):
+        ''' test `BaseModel.all()` command'''
+
+        # all
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('BaseModel.all()')
+            self.assertEqual("[]\n", f.getvalue())
+            f.close()
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('all BaseModel')
+            self.assertEqual("[]\n", f.getvalue())
+            f.close()
+
+        # count
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('BaseModel.count()')
+            self.assertEqual("0\n", f.getvalue())
+            f.close()
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('BaseModel.count()')
+            self.assertEqual("0\n", f.getvalue())
+            f.close()
+
+    def test_User(self):
+        ''' test `User.all()` command'''
+
+        # all
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('User.all()')
+            self.assertEqual("[]\n", f.getvalue())
+            f.close()
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('all User')
+            self.assertEqual("[]\n", f.getvalue())
+            f.close()
+
+        # count
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('User.count()')
+            self.assertEqual("0\n", f.getvalue())
+            f.close()
+
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('User.count()')
+            self.assertEqual("0\n", f.getvalue())
+            f.close()
