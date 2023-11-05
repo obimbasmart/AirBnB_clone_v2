@@ -60,7 +60,7 @@ class TestConsole(unittest.TestCase):
             self.assertEqual("[]\n", f.getvalue())
             f.close()
 
-        # count
+        # -------- test count ---------
         with patch('sys.stdout', new=StringIO()) as f:
             """test `BaseModel.count()` """
             HBNBCommand().onecmd('BaseModel.count()')
@@ -79,6 +79,18 @@ class TestConsole(unittest.TestCase):
 
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('BaseModel.show(12345)')
+            self.assertEqual('** no instance found **\n', f.getvalue())
+            f.close()
+
+        # ---------- destroy ---------
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('BaseModel.destroy(12345)')
+            self.assertEqual('** no instance found **\n', f.getvalue())
+            f.close()
+
+        # ---------- update ---------
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('BaseModel.update(12345, name, obimba)')
             self.assertEqual('** no instance found **\n', f.getvalue())
             f.close()
 
@@ -119,5 +131,17 @@ class TestConsole(unittest.TestCase):
 
         with patch('sys.stdout', new=StringIO()) as f:
             HBNBCommand().onecmd('User.show(12345)')
+            self.assertEqual('** no instance found **\n', f.getvalue())
+            f.close()
+
+        # ---------- destroy ---------
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('User.destroy(12345)')
+            self.assertEqual('** no instance found **\n', f.getvalue())
+            f.close()
+
+        # ---------- update ---------
+        with patch('sys.stdout', new=StringIO()) as f:
+            HBNBCommand().onecmd('User.update(12345, name, smart)')
             self.assertEqual('** no instance found **\n', f.getvalue())
             f.close()
