@@ -1,7 +1,6 @@
 * {
-    box-sizing: border-box;
+    /* border: 1px solid black; */
 }
-
 .filter {
     width: 100%;
     height: 70px;
@@ -26,41 +25,37 @@
 }
 
 .filter button:hover {
-    opacity: .9;
+    opacity: .88;
 }
 
 .locations, .amenities {
     position: relative;
     height: 100%;
     text-align: left;
-    align-items: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 25px;
-    height: 100%;
-   
-
+    padding: 30px;
+    padding-left: 35px;
 }
 
-.locations {
+section.filter div:first-child {
     border-right: 1px solid  #DDDDDD;
     
 }
 
-.amenities {
+section.filter .amenities {
     margin-right: auto
 }
-section > .locations > h3,
-section > .amenities > h3 {
+
+section.filter div h3 {
     font-weight: 600;
     margin: 0;
     text-align: left;
 }
 
-section > .locations > h4,
-section > .amenities > h4 {
+section.filter div h4 {
     font-weight: 400;
     font-size: 14;
     margin: 0;
@@ -71,15 +66,35 @@ section > .amenities > h4 {
 .popover:hover {
     background-color: #FAFAFA;
     position: absolute;
+    left: 0;
+    top: 54px;
     visibility: visible;
     display: flex;
     flex-direction: column;
-    left: 0;
-    top: 54px;
     width: 100%;
-    padding: 4px 15px 4px 15px;
+    /* padding: 4px 15px 4px 15px; */
     border: 1px solid #DDDDDD;
     box-shadow: 1px 1px 3px 1px hsla(0, 1%, 75%, 0.29);
+    padding: 25px;
+}
+
+ul.popover > li {
+    margin-left: -10px;
+    /* border: 1px solid black; */
+}
+
+ul.popover > ul {
+    margin-bottom: 10px;
+}
+
+ul.popover > li h2 {
+    font-size: 16px;
+    margin: 0;
+}
+
+ul.popover ul li {
+    margin-left: -30px;
+    padding: 2px;
 }
 
 .popover {
@@ -87,15 +102,12 @@ section > .amenities > h4 {
     display: none;
 }
 
-.popover > li > ul{
-        margin-top: 0;
-        padding-top: 0;
-}
-li > h2 {
-    margin: 0;
-}
 
-li {
+ul.popover li {
     display: block;
     list-style: none;
+}
+
+section.filter .amenities .popover > li{
+    margin: 0 auto 5px 10px;
 }
