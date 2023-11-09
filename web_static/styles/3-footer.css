@@ -9,4 +9,6 @@ footer {
     align-items: center;
 
     border-top: 1px solid  #CCCCCC;
+    margin-top: -100px;
+    
 }

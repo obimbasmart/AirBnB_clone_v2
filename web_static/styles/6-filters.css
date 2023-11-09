@@ -28,7 +28,8 @@
     opacity: .88;
 }
 
-.locations, .amenities {
+section.filter .locations,
+section.filter .amenities {
     position: relative;
     height: 100%;
     text-align: left;
