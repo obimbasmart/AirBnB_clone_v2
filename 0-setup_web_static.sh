@@ -10,7 +10,7 @@ sudo mkdir -p "/data/web_static/shared/"
 sudo mkdir -p "/data/web_static/releases/test/"
 
 # give ownership to ubuntu user and group
-sudo chown -R "$USER":"$USER" /data/
+sudo chown -R ubuntu:ubuntu /data/
 
 #create fake test html content
 echo "<h1>Deploying web static!!! wait for it</h1>" > "/data/web_static/releases/test/index.html"
