@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # set up web servers for deployment
 
+# install nginx
+sudo apt-get -y update &> /dev/null
+sudo apt-get -y install nginx &> /dev/null
+
 # create directories
 sudo mkdir -p "/data/web_static/shared/"
 sudo mkdir -p "/data/web_static/releases/test/"
@@ -34,6 +38,7 @@ server {
 
 	location /hbnb_static {
 		alias /data/web_static/current/;
+		index index.html;
 	}
 
 }
