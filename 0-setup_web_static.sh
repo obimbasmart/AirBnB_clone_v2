@@ -6,7 +6,7 @@ sudo mkdir -p "/data/web_static/shared/"
 sudo mkdir -p "/data/web_static/releases/test/"
 
 # give ownership to ubuntu user and group
-sudo chown -R ubuntu:ubuntu /data/
+sudo chown -R "$USER":"$USER" /data/
 
 #create fake test html content
 echo "<h1>Deploying web static!!! wait for it</h1>" > "/data/web_static/releases/test/index.html"
@@ -39,7 +39,7 @@ server {
 }
 
 "
-sudo chown -R ubuntu:ubuntu "$nginx_config"
+sudo chown -R "$USER":"$USER" "$nginx_config"
 echo "$new_content" > "$nginx_config"
 
 # restart nginx
