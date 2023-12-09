@@ -9,19 +9,18 @@ sudo apt-get -y install nginx &> /dev/null
 sudo mkdir -p "/data/web_static/shared/"
 sudo mkdir -p "/data/web_static/releases/test/"
 
-# give ownership to ubuntu user and group
-sudo chown -R ubuntu:ubuntu /data/
-
 #create fake test html content
-echo "<h1>Deploying web static!!! wait for it</h1>" > "/data/web_static/releases/test/index.html"
+echo "<h1>Deploying web static!!! wait for it</h1>" | sudo tee  "/data/web_static/releases/test/index.html" &> /dev/null
 
 # create symbolic link
 sudo ln -sf "/data/web_static/releases/test" "/data/web_static/current"
 
+# give ownership to ubuntu user and group
+sudo chown -R ubuntu:ubuntu /data/
 
 # change nginx default server root directory
 nginx_config="/etc/nginx/sites-available/default"
-new_content="
+echo "
 # Default server configuration
 
 server {
@@ -43,9 +42,8 @@ server {
 
 }
 
-"
-sudo chown -R "$USER":"$USER" "$nginx_config"
-echo "$new_content" > "$nginx_config"
+" | sudo tee "$nginx_config" &> /dev/null
 
 # restart nginx
 sudo service nginx restart
+
