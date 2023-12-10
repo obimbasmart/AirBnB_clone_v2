@@ -15,21 +15,21 @@ package { 'nginx':
 # create directories
 file { ['/data/',
   '/data/web_static',
-  '/data/web_static/shared',
   '/data/web_static/releases',
+  '/data/web_static/shared',
   '/data/web_static/releases/test']:
   ensure  => 'directory',
-  recurse => true,
-  owner   => 'ubuntu',
-  group   => 'ubuntu'
+  owner   => 'obimbasmart',
+  group   => 'obimbasmart',
+  recurse => true
 }
 
 #create fake test html content
 file { '/data/web_static/releases/test/index.html':
   ensure  => present,
   content => '<h1>Okay, Deploying web static!!! wait for it</h1>',
-  owner   => 'ubuntu',
-  group   => 'ubuntu'
+  owner   => 'obimbasmart',
+  group   => 'obimbasmart'
 }
 
 
