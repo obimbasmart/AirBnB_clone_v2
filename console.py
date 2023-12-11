@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 '''
 Module contains entry point of the console which serves
@@ -32,9 +32,7 @@ class HBNBCommand(cmd.Cmd):
         if error_in_command(parse(args), 'create'):
             return
 
-        new_obj = globals()[tokens['class']]()
-        for key, val in tokens['params'].items():
-            setattr(new_obj, key, val)
+        new_obj = globals()[tokens['class']](**tokens['params'])
         new_obj.save()
         print(new_obj.id)
 
