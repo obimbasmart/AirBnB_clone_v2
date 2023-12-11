@@ -34,14 +34,25 @@ class FileStorage:
             return
         FileStorage.__file_path = value
 
-    def all(self):
-        '''return dictionary of objects: __objects'''
-        return FileStorage.__objects
+    def all(self, cls=None):
+        """Returns a dictionary of models currently in storage"""
+        if cls is None:
+            return FileStorage.__objects
+        return {key: obj
+                for key, obj in self.__objects.items() if cls.__name__ in key}
 
     def new(self, obj):
         '''add @obj to __object dict where key = obj_class.id'''
         key = obj.to_dict()['__class__'] + '.' + obj.id
         FileStorage.__objects[key] = obj
+
+    def delete(self, obj=None):
+        """delete obj from @__objects if it exists"""
+        if obj is None or \
+                self.__objects.get(obj.to_dict()['__class__']
+                                   + '.' + obj.id) is None:
+            return
+        del self.__objects[obj.to_dict()['__class__'] + '.' + obj.id]
 
     def save(self):
         ''' serializes @__objects to the JSON file (path: __file_path)'''
