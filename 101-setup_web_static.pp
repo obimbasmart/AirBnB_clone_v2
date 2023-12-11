@@ -19,8 +19,8 @@ file { ['/data/',
   '/data/web_static/shared',
   '/data/web_static/releases/test']:
   ensure  => 'directory',
-  owner   => 'obimbasmart',
-  group   => 'obimbasmart',
+  owner   => 'ubuntu',
+  group   => 'ubuntu',
   recurse => true
 }
 
@@ -28,8 +28,8 @@ file { ['/data/',
 file { '/data/web_static/releases/test/index.html':
   ensure  => present,
   content => '<h1>Okay, Deploying web static!!! wait for it</h1>',
-  owner   => 'obimbasmart',
-  group   => 'obimbasmart'
+  owner   => 'ubuntu',
+  group   => 'ubuntu'
 }
 
 
