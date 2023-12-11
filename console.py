@@ -16,6 +16,8 @@ import re
 from models.state import State
 from models.user import User
 
+from pprint import pprint as pp
+
 
 class HBNBCommand(cmd.Cmd):
     '''HBNB command line interpreter'''
@@ -24,12 +26,15 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
     original_input = ''
 
-    def do_create(self, arg):
+    def do_create(self, args):
         '''Creates a new instance of "arg"'''
-        if error_in_command(parse(arg), 'create'):
+        tokens = tokenize(args)
+        if error_in_command(parse(args), 'create'):
             return
 
-        new_obj = globals()[arg]()
+        new_obj = globals()[tokens['class']]()
+        for key, val in tokens['params'].items():
+            setattr(new_obj, key, val)
         new_obj.save()
         print(new_obj.id)
 
@@ -193,7 +198,6 @@ def error_in_command(args, command):
     '''handle errors in command. return True if error
     exist in command, False if no error is found
     '''
-
     valid_class_names = ['BaseModel', 'User',
                          'Place', 'State', 'City', 'Amenity', 'Review']
 
@@ -218,6 +222,19 @@ def error_in_command(args, command):
         return True
 
     return False
+
+
+def tokenize(args):
+    """convert input string into tokens
+    return a dictionary of class_name and parameters"""
+    arg_list = args.split(' ')
+    params = {item.split('=')[0]: item.split("=")[1] for item in arg_list[1:]}
+    params = {key: int(val) if all(char not in val for char in '".-')
+              else float(val) if '"' not in val and "." in val
+              else val.replace('_', ' ') if '_' in val
+              else val for key, val in params.items()}
+    tokens = {'class': arg_list[0], 'params': params}
+    return tokens
 
 
 if __name__ == '__main__':
