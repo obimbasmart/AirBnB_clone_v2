@@ -229,8 +229,8 @@ def tokenize(args):
     params = {item.split('=')[0]: item.split("=")[1] for item in arg_list[1:]}
     params = {key: int(val) if all(char not in val for char in '".-')
               else float(val) if '"' not in val and "." in val
-              else val.replace('_', ' ') if '_' in val
-              else val for key, val in params.items()}
+              else val.replace('_', ' ').strip('"') if '_' in val
+              else val.strip('"') for key, val in params.items()}
     tokens = {'class': arg_list[0], 'params': params}
     return tokens
 
