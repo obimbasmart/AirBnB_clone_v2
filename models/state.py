@@ -19,10 +19,11 @@ class State(BaseModel, Base):
         cities = relationship("City", back_populates="state",
                               cascade="all, delete-orphan")
 
-    @property
-    def cities(self):
-        """ returns the list of City instances with
-        state_id equals to the current State.id"""
-        from models import storage
-        return [city for city in storage.all(City).values()
-                if self.id == city.id]
+    else:
+        @property
+        def cities(self):
+            """ returns the list of City instances with
+            state_id equals to the current State.id"""
+            from models import storage
+            return [city for city in storage.all(City).values()
+                    if self.id == city.id]
