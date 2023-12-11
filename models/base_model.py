@@ -1,11 +1,10 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 """ This module contains the class BaseModel that defines all common
 attributes/methods for other classes (child classes)
 """
 
 import uuid
-from datetime import date
 from datetime import datetime
 from sqlalchemy import Column, String, DATETIME
 from sqlalchemy.ext.declarative import declarative_base
