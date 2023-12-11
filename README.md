@@ -74,8 +74,10 @@ BaseModel    <!--base class->
 ``````
 
 ### Storage Engine
-The storage mechanism uses Json serialization and deserialization to dump and load instances from file
 
+ The storage engine has been reimplemented to allow transition between FileStorage and DBStorage:  The abstraction makes it easy to change storage type  without knowing how it’s stored.
+
+- #### File storage
 ```
 <class 'BaseModel'>
 .  to_dict()
@@ -88,6 +90,15 @@ The storage mechanism uses Json serialization and deserialization to dump and lo
     . <class 'dict'>
 <class 'BaseModel'>
 ```
+
+- #### DB storage
+
+<div align=center>
+<img src  = "https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2020/9/daaef631636b40e0a279a8f240703e065f9d3481.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20231211%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20231211T134008Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=cf1eb5871dd5ba6807b7ed6f7ac55a40c426e155edab9a74cfdb531e82686d6f">
+</div>
+
+The DataBase(DB) storage is implemeneted using `MYSQL` and the `SQLAlchemy` library which maps objects to Database storage
+
 
 ## Dependencies
 - Python3.x
