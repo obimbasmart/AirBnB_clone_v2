@@ -71,3 +71,7 @@ class FileStorage:
                 if '__class__' in value:
                     FileStorage.__objects[key] = globals()[
                         value['__class__']](**value)
+
+    def close(self):
+        """reload objects"""
+        self.reload()

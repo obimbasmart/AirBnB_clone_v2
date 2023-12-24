@@ -10,6 +10,7 @@ from models.amenity import Amenity
 from models.review import Review
 import os
 from sqlalchemy import create_engine
+from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
 
 
@@ -17,6 +18,7 @@ class DBStorage:
     """This class manages storage of hbnb models in JSON format"""
     __engine = None
     __session = None
+    __Session = None
 
     def __init__(self):
         """create engine and session for db storage"""
@@ -59,5 +61,10 @@ class DBStorage:
     def reload(self):
         """create all tables in the database"""
         Base.metadata.create_all(self.__engine)
-        Session = sessionmaker(bind=self.__engine)
-        self.__session = Session()
+        session_factory = sessionmaker(bind=self.__engine)
+        self.__Session = scoped_session(session_factory)
+        self.__session = self.__Session()
+
+    def close(self):
+        """close session"""
+        self.__Session.remove()

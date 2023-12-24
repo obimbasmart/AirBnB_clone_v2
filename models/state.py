@@ -26,4 +26,4 @@ class State(BaseModel, Base):
             state_id equals to the current State.id"""
             from models import storage
             return [city for city in storage.all(City).values()
-                    if self.id == city.id]
+                    if self.id == city.state_id]

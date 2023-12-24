@@ -46,7 +46,7 @@ class BaseModel:
     def __str__(self):
         '''Informal representation of BaseModel object'''
         return "[{}] ({}) {}".format(
-            self.__class__.__name__, self.id, self.__dict__)
+            self.__class__.__name__, self.id, self.to_dict())
 
     def save(self):
         """ update the updated_at attr, with current datetime"""
