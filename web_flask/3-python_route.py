@@ -25,7 +25,7 @@ def hbnb_c(text):
     return f"C {escape(text.replace('_', ' '))}"
 
 
-@app.route("/python")
+@app.route("/python", strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
 def hbnb_python(text="is_cool"):
     """route hbnb python"""
