@@ -2,7 +2,6 @@
 """starts a Flask web application"""
 
 from flask import Flask, render_template
-from markupsafe import escape
 from models import storage
 from models.state import State
 
@@ -25,4 +24,4 @@ def close_db_connection(error=None):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
