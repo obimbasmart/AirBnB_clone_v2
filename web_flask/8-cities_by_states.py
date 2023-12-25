@@ -8,7 +8,7 @@ from models.state import State
 app = Flask(__name__)
 
 
-@app.route("/states_list", strict_slashes=False)
+@app.route("/cities_by_states", strict_slashes=False)
 def state_city_list():
     """show list of states and cities"""
     states = sorted([state for _, state in storage.all(
